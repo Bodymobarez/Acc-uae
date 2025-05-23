@@ -1,40 +1,38 @@
 
-
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // comment fix: Corrected import paths
-import PageHeader from '../../../components/common/PageHeader';
+import PageHeader from '../../components/common/PageHeader';
 // comment fix: Corrected import paths
-import Button from '../../../components/common/Button';
+import Button from '../../components/common/Button';
 // comment fix: Corrected import paths
-import Input from '../../../components/common/Input';
+import Input from '../../components/common/Input';
 // comment fix: Corrected import paths
-import Select from '../../../components/common/Select';
+import Select from '../../components/common/Select';
 // comment fix: Corrected import paths
-import Card from '../../../components/common/Card';
+import Card from '../../components/common/Card';
 // comment fix: Corrected import paths
-import HotelServiceForm from '../../../components/HotelServiceForm';
+import HotelServiceForm from '../../components/HotelServiceForm';
 import { 
   Booking, BookingServiceItem, BookingStatus, Client, Employee, 
   HotelServiceDetails, ServiceType, BookingCategory 
 // comment fix: Corrected import paths
-} from '../../../types';
+} from '../../types';
 import { 
   mockBookings, mockClients, mockEmployees, generateId, mockServices 
 // comment fix: Corrected import paths
-} from '../../../data/mockData';
+} from '../../data/mockData';
 // comment fix: Corrected import paths
-import { useLanguage } from '../../../contexts/LanguageContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 // comment fix: Corrected import paths
-import { BOOKING_CATEGORY_OPTIONS, UAE_VAT_RATE } from '../../../constants';
+import { BOOKING_CATEGORY_OPTIONS, UAE_VAT_RATE } from '../../constants';
 
 const IconSave = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path d="M10.75 4.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" /><path fillRule="evenodd" d="M2 2.5a2.5 2.5 0 012.5-2.5h11A2.5 2.5 0 0118 2.5v15a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 012 17.5v-15zm11.5.906a.75.75 0 00-1.06 0L8.594 7.25H6.75a.75.75 0 000 1.5h2.373a.75.75 0 00.529-.22L13.594 4a.75.75 0 00-.031-1.06z" clipRule="evenodd" /></svg>;
 
 type ManageHotelBookingFormState = Omit<Booking, 'id' | 'services' | 'totalCost' | 'totalPrice' | 'vatAmount' | 'netProfit' | 'employeeCommissionAmount' | 'customerServiceCommissionAmount'| 'invoiceNumber'> & {
   hotelServiceCost: number;
   hotelServicePrice: number;
-  customerServiceCommissionPercentage: number; // Added this
+  customerServiceCommissionPercentage: number; 
 };
 
 const initialHotelServiceDetails: HotelServiceDetails = {
@@ -43,7 +41,7 @@ const initialHotelServiceDetails: HotelServiceDetails = {
   roomType: '', checkInDate: new Date().toISOString().split('T')[0], checkOutDate: new Date(Date.now() + 86400000).toISOString().split('T')[0], // Default to next day
   branch: 'Main', ratePerNight: 0, mealsPlan: 'BB', noOfAdults: 1, noOfChildren: 0, noOfRooms: 1, noOfNights: 1,
   guests: '', bookingDetails: '', additionalReference: '', couponRemark: '', 
-  customerEmpNo: '', // This was indicated as line 56 by the error, but it's a field in an object.
+  customerEmpNo: '', 
   termsAndConditions: false, pickUp: false, dropOff: false,
 };
 
@@ -55,7 +53,6 @@ const ManageHotelBookingPage: React.FC = () => {
 
   const [isEditing, setIsEditing] = useState(!!bookingId);
   
-  // Ensure mockBookings is defined and is an array before accessing its length
   const initialFileNumber = `TF-${new Date().getFullYear()}-${String((mockBookings ? mockBookings.length : 0) + 101).padStart(3, '0')}`;
 
 
@@ -67,7 +64,7 @@ const ManageHotelBookingPage: React.FC = () => {
     bookingCategory: BookingCategory.DOMESTIC,
     status: BookingStatus.PENDING,
     employeeCommissionPercentage: 10,
-    customerServiceCommissionPercentage: 0, // Initialize new field
+    customerServiceCommissionPercentage: 0, 
     notes: '',
     hotelServiceCost: 0,
     hotelServicePrice: 0,
@@ -108,7 +105,6 @@ const ManageHotelBookingPage: React.FC = () => {
         navigate('/bookings/hotels');
       }
     } else {
-       // Ensure a fresh file number if not editing
       const newFileNumber = `TF-${new Date().getFullYear()}-${String((mockBookings ? mockBookings.length : 0) + 101).padStart(3, '0')}`;
       setFormState({
         fileNumber: newFileNumber,
@@ -272,5 +268,6 @@ const ManageHotelBookingPage: React.FC = () => {
     </div>
   );
 };
-// Fix: Add default export
+
 export default ManageHotelBookingPage;
+    

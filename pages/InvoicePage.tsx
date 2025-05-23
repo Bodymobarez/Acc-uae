@@ -1,26 +1,18 @@
 
-
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// FIX: Corrected import path for types
 // comment fix: Corrected import paths
 import { Booking, Client, Invoice, InvoiceItem, BookingCategory, ServiceType } from '../types';
 // comment fix: Corrected import paths
 import { mockBookings, mockClients } from '../data/mockData'; 
-// FIX: Corrected import path for PageHeader
 // comment fix: Corrected import paths
 import PageHeader from '../components/common/PageHeader';
-// FIX: Corrected import path for Card
 // comment fix: Corrected import paths
 import Card from '../components/common/Card';
-// FIX: Corrected import path for Button
 // comment fix: Corrected import paths
 import Button from '../components/common/Button';
-// FIX: Corrected import path for useLanguage
 // comment fix: Corrected import paths
 import { useLanguage } from '../contexts/LanguageContext';
-// FIX: Corrected import path for UAE_VAT_RATE
 // comment fix: Corrected import paths
 import { UAE_VAT_RATE } from '../constants';
 
@@ -49,32 +41,12 @@ const InvoicePage: React.FC = () => {
           total: s.price * s.quantity,
         }));
 
-        // Subtotal is sum of (item.price * quantity) from booking.services
-        const subtotalForInvoice = booking.totalPrice; // This totalPrice from booking should represent the sum of (item.price * quantity)
+        const subtotalForInvoice = booking.totalPrice; 
         const vatAmountForInvoice = booking.vatAmount || 0;
-        
-        // GrandTotal should be the client payable amount.
-        // If domestic/visa, totalPrice from booking already includes VAT conceptually, but VAT is then separated.
-        // The true client payable amount is what's reflected after VAT logic.
-        // Let's re-evaluate how grandTotal should be derived for display.
-        // booking.totalPrice from mockData is sum of service item prices (which for domestic are VAT-inclusive).
-        // booking.vatAmount is the calculated VAT.
-        // If Domestic/Visa: totalPrice (input) = Net Revenue + VAT. So, GrandTotal = totalPrice (input).
-        // If International: totalPrice (input) is Net Revenue (VAT is on profit). So, GrandTotal = totalPrice (input) + VAT on profit.
-        // This is slightly confusing. Let's simplify: Client always pays `booking.totalPrice + booking.vatAmount` IF vatAmount is calculated on profit.
-        // Or, if `booking.totalPrice` is already the final amount including VAT, then `grandTotal` is just `booking.totalPrice`.
-
-        // For clarity on invoice:
-        // Subtotal = The sum of prices before any VAT considerations if VAT is added on top.
-        // Or, if prices are VAT inclusive, subtotal is the VAT-exclusive amount.
-
-        // Let's define Subtotal as the sum of (item.price / (1+VAT if domestic)) * quantity.
-        // This makes VAT an additive component.
         
         let invoiceSubtotal = 0;
         items.forEach(item => {
-            const bookingItem = booking.services.find(s => s.serviceName === item.description); // Simplified match
-            // comment fix: Corrected ServiceType import and usage
+            const bookingItem = booking.services.find(s => s.serviceName === item.description); 
             if(booking.bookingCategory === BookingCategory.DOMESTIC || bookingItem?.serviceType === ServiceType.VISA) {
                 invoiceSubtotal += item.total / (1 + UAE_VAT_RATE);
             } else {
@@ -82,9 +54,7 @@ const InvoicePage: React.FC = () => {
             }
         });
 
-
         const grandTotalForInvoice = invoiceSubtotal + vatAmountForInvoice;
-        
         const generatedInvoiceNumber = booking.invoiceNumber || `INV-${booking.fileNumber}-${Date.now().toString().slice(-5)}`;
 
         setInvoiceData({
@@ -95,11 +65,11 @@ const InvoicePage: React.FC = () => {
           clientName: client?.name || t('common.unknown_client'),
           clientAddress: client?.address,
           clientVatNumber: client?.vatNumber,
-          items, // Original items (prices as sold to client)
-          subtotal: invoiceSubtotal, // Sum of prices (VAT-exclusive for Domestic/Visa, or base for International)
+          items, 
+          subtotal: invoiceSubtotal, 
           vatRate: UAE_VAT_RATE,
-          vatAmount: vatAmountForInvoice, // The calculated VAT amount
-          grandTotal: grandTotalForInvoice, // Subtotal + VAT
+          vatAmount: vatAmountForInvoice, 
+          grandTotal: grandTotalForInvoice, 
           companyName: t('invoice.companyName'),
           companyAddress: t('invoice.companyAddress'),
           companyVatNumber: t('invoice.companyVat'),
@@ -111,8 +81,7 @@ const InvoicePage: React.FC = () => {
             const bookingIndex = mockBookings.findIndex(b => b.id === bookingId);
             if (bookingIndex !== -1) {
                 mockBookings[bookingIndex].invoiceNumber = generatedInvoiceNumber;
-                // Also save calculated vatAmount if it wasn't in mock data
-                if (mockBookings[bookingIndex].vatAmount === undefined) { // Ensure property check is safe
+                if (mockBookings[bookingIndex].vatAmount === undefined) { 
                      mockBookings[bookingIndex].vatAmount = vatAmountForInvoice;
                 }
             }
@@ -120,7 +89,7 @@ const InvoicePage: React.FC = () => {
 
       }
     }
-  }, [bookingId, t, locale]); // Added locale to dependencies of useEffect
+  }, [bookingId, t, locale]); 
 
   if (!invoiceData) {
     return (
@@ -230,5 +199,6 @@ const InvoicePage: React.FC = () => {
     </div>
   );
 };
-// Fix: Add default export
+
 export default InvoicePage;
+    

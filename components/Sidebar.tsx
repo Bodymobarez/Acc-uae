@@ -171,13 +171,13 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen }) => {
           <button
             onClick={() => toggleSubmenu(item.nameKey)}
             className={`w-full flex items-center justify-between ${paddingClass} py-2.5 text-sm rounded-lg transition-colors duration-150 ease-in-out
-              ${isActive && !item.isParentOnly ? 'bg-primary-500 text-white font-medium shadow-md' : 'text-secondary-700 hover:bg-primary-100 hover:text-primary-700'}
-              ${isActive && item.isParentOnly ? 'font-medium text-primary-600' : ''}
+              ${isActive && !item.isParentOnly ? 'bg-primary-500 text-white font-medium shadow-md' : 'text-secondary-700 hover:bg-accent-50 hover:text-accent-600'}
+              ${isActive && item.isParentOnly ? 'font-medium text-accent-600' : ''}
               `}
             aria-expanded={isSubmenuOpen}
           >
             <div className="flex items-center space-x-3 rtl:space-x-reverse">
-              <span className={isActive && item.isParentOnly ? 'text-primary-500' : ''}>{item.icon}</span>
+              <span className={isActive && item.isParentOnly ? 'text-accent-600' : ''}>{item.icon}</span>
               <span>{translatedName}</span>
             </div>
             <svg className={`w-4 h-4 transform transition-transform duration-150 sidebar-chevron ${isSubmenuOpen ? (language === 'ar' ? '-rotate-90' : 'rotate-90') : ''}`} fill="currentColor" viewBox="0 0 20 20">
@@ -198,7 +198,7 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen }) => {
         <Link
           to={item.path}
           className={`flex items-center space-x-3 rtl:space-x-reverse ${paddingClass} py-2.5 text-sm rounded-lg transition-colors duration-150 ease-in-out
-            ${isActive ? 'bg-primary-500 text-white font-medium shadow-md' : 'text-secondary-700 hover:bg-primary-100 hover:text-primary-700'}`}
+            ${isActive ? 'bg-primary-500 text-white font-medium shadow-md' : 'text-secondary-700 hover:bg-accent-50 hover:text-accent-600'}`}
         >
           {item.icon}
           <span>{translatedName}</span>

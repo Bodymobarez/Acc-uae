@@ -1,22 +1,36 @@
+
 {
-  "name": "tourism-accounting-app-(uae)",
-  "private": true,
-  "version": "0.0.0",
+  "name": "tourism-accounting-app-uae",
+  "version": "1.0.0",
+  "description": "A comprehensive accounting application for tourism companies in the UAE, managing clients, suppliers, services, bookings, employee commissions, chart of accounts, and financial reporting.",
   "type": "module",
+  "main": "index.tsx",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "echo \"Run your development server command here, e.g., vite\" && exit 1",
+    "build": "echo \"Run your build command here, e.g., tsc && vite build\" && exit 1",
+    "start": "echo \"Run your start command here, e.g., vite preview\" && exit 1",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-router-dom": "^7.6.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.0",
     "recharts": "^2.15.3"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "typescript": "~5.7.2",
-    "vite": "^6.2.0"
-  }
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.3.0",
+    "tailwindcss": "^3.4.1",
+    "eslint": "^8.57.0"
+  },
+  "keywords": [
+    "tourism",
+    "accounting",
+    "uae",
+    "react",
+    "typescript"
+  ],
+  "author": "Your Name/Company",
+  "license": "ISC"
 }
