@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tourism Accounting App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"},
+            secondary: {"50":"#f0f9ff","100":"#e0f2fe","200":"#bae6fd","300":"#7dd3fc","400":"#38bdf8","500":"#0ea5e9","600":"#0284c7","700":"#0369a1","800":"#075985","900":"#0c4a6e","950":"#082f49"},
+            accent: {"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843","950":"#500724"}
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif', 'Tahoma', 'Arial'], // Added Tahoma and Arial as common Arabic fallbacks
+          },
+        }
+      },
+      // Removed plugins array to prevent syntax error with require() in browser
+      // plugins: [
+      //   require('@tailwindcss/forms'),
+      // ],
+    }; // Explicit semicolon added here
+  </script>
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <style>
+    /* For better scrollbar aesthetics (optional) */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1; /* secondary-300 */
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8; /* secondary-400 */
+    }
+    /* Basic form styling fallbacks if @tailwindcss/forms was heavily relied upon */
+    input[type='text'],
+    input[type='email'],
+    input[type='number'],
+    input[type='date'],
+    input[type='password'],
+    textarea,
+    select {
+      @apply block w-full px-3 py-2 text-sm text-secondary-700 bg-white border border-secondary-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 disabled:bg-secondary-50;
+    }
+    input[type='checkbox'], input[type='radio'] {
+      @apply rounded border-secondary-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-offset-0 focus:ring-primary-200 focus:ring-opacity-50;
+    }
+    /* Helper class for flipping icons in RTL */
+    .rtl-flip {
+        transform: scaleX(-1);
+    }
+    html[dir="rtl"] .sidebar-chevron {
+        transform: scaleX(-1); /* Specifically flip chevron icons */
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.6.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react-dom": "https://esm.sh/react-dom@^19.1.0",
+    "recharts": "https://esm.sh/recharts@^2.15.3"
+  }
+}
+</script>
+</head>
+<body class="bg-secondary-100 antialiased">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script> <!-- App entry point -->
+</body>
+</html><link rel="stylesheet" href="index.css">
+<script src="index.tsx" type="module"></script>
